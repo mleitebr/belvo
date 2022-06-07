@@ -1,0 +1,1585 @@
+{
+	"info": {
+		"_postman_id": "6b919690-11f1-49e3-a361-2fe122a8459a",
+		"name": "Belvo API Docs",
+		"description": "# 👋 Introduction \n\nBelvo is an open finance API for Latin America that allows companies to access banking and fiscal information in a secure as well as agile way.\nThrough our API, you can access:\n\n  - **Bank and Gig information** such as account statements, real-time balance, historical transactions, and account owner identification.\n  - **Fiscal information** such as received and sent invoices and tax returns.\n\nOur Postman Workspace will let you intereact with all the main resources so that you can interact with and test out our API. \n\n# 🤩 Documentation\n\nFor our full documentation, please see:\n\n- Our [DevPortal](https://developers.belvo.com/docs) (contains handy guides on how to implement Belvo)\n- Our [API reference](https://developers.belvo.com/reference/using-the-api-reference) (detailed documentation on the requests and responses of all our endpoints.)\n\n\n# ▶️ Getting started\n\nMake sure that you also check out our Developer Portal for guides on:\n- [How to get started in five minutes](https://developers.belvo.com/docs/get-started-in-5-minutes)\n- [Using our Sandbox environment](https://developers.belvo.com/docs/test-in-sandbox)\n\nas well as:\n- [How to integrate the widget](https://developers.belvo.com/docs/connect-widget)\n- [Use our quickstart application](https://developers.belvo.com/docs/quickstart-application)\n\n# 👀 Watch and Fork us!\n\n> **⚠️ Warning: Credential Use**<br>Please make sure that you make use of Postman's Environment Variables to store any sensitive parameters, most importantly your API keys or Cookie ID. Follow our [Setting Up Postman guide](https://developers.belvo.com/docs/test-with-postman) to see how to do this.\n\nIf you'd like to use our collection:\n\n1. Click \"Watch\" on the collection.\n2. Fork the collection.\n\nYou'll get a notification whenever we update the collection and you'll be able to pull in all the changes, making sure you're working with the most up-to-date copy every time.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Marcelo - Banking and Gig API",
+			"item": [
+				{
+					"name": "Accounts",
+					"item": [
+						{
+							"name": "Retrieve accounts for a link",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "0da30440-bd5e-4a10-8cca-32e6714a2cfc",
+										"exec": [
+											"var template=`",
+											"",
+											"<style>",
+											"    td, th {text-align: center; padding:15px;}",
+											"    table, th, td {",
+											"        border: 1px solid black;",
+											"    }",
+											"    </style>",
+											"        <table bgcolor=\"#ffffff\"> ",
+											"    ",
+											"",
+											"            <tr>",
+											"            <tr bgcolor=\"#50a9f2\">",
+											"                <th>id</th>",
+											"                <th>institution name</th>",
+											"                <th>institution type</th>",
+											"                <th>category</th>",
+											"                <th>public_identification_value</th>",
+											"                <th>balance_type</th>",
+											"                <th>balance_current</th>",
+											"                <th>balance_available</th>",
+											"                ",
+											"                             ",
+											"            </tr>",
+											"",
+											"        {{#each response}}",
+											"            </tr>",
+											"                <td>{{id}}</td>",
+											"                <td>{{institution.name}}</td>",
+											"                <td>{{institution.type}}</td>",
+											"                <td>{{category}}</td>",
+											"                <td>{{public_identification_value}}</td>",
+											"                <td>{{balance_type}}</td>",
+											"                <td>{{balance.current}}</td>",
+											"                <td>{{balance.available}}</td>",
+											"            </tr>",
+											"        {{/each}}",
+											"    </table>",
+											"`;",
+											"pm.visualizer.set(template, {",
+											"    response:pm.response.json()",
+											"//response:JSON.parse(responseBody)",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"id": "f751bce5-7177-4603-98ac-5cfb968ca029",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"link\": \"{{linkid}}\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/accounts/",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"accounts",
+										""
+									]
+								},
+								"description": "# Documentation 📖\n\nSee detailed documentation for the **Retrieve accounts for a link** call in our [API Reference](https://developers.belvo.com/reference/retrieveaccounts)."
+							},
+							"response": [
+								{
+									"id": "6b175bc9-aac9-4fb8-a6fd-067234112eb7",
+									"name": "Ok (when save_data=false)",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: basic",
+												"key": "Authorization",
+												"value": "Basic <credentials>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"link\": \"<uuid>\",\n    \"encryption_key\": \"<string>\",\n    \"token\": \"<string>\",\n    \"save_data\": true\n}"
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/accounts",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"accounts"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "[\n\t{\n\t\t\"link\": {\n\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t},\n\t\t\"institution\": {\n\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t},\n\t\t\"collected_at\": {\n\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t},\n\t\t\"category\": {\n\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t},\n\t\t\"type\": {\n\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t},\n\t\t\"name\": {\n\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t},\n\t\t\"number\": {\n\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t},\n\t\t\"balance\": {\n\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t},\n\t\t\"currency\": {\n\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t},\n\t\t\"bank_product_id\": {\n\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t},\n\t\t\"internal_identification\": {\n\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t},\n\t\t\"public_identification_name\": {\n\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t},\n\t\t\"public_identification_value\": {\n\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t},\n\t\t\"last_accessed_at\": {\n\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t},\n\t\t\"credit_data\": {\n\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t},\n\t\t\"loan_data\": {\n\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t},\n\t\t\"funds_data\": {\n\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t},\n\t\t\"gig_payment_data\": {\n\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t}\n\t},\n\t{\n\t\t\"link\": {\n\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t},\n\t\t\"institution\": {\n\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t},\n\t\t\"collected_at\": {\n\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t},\n\t\t\"category\": {\n\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t},\n\t\t\"type\": {\n\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t},\n\t\t\"name\": {\n\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t},\n\t\t\"number\": {\n\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t},\n\t\t\"balance\": {\n\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t},\n\t\t\"currency\": {\n\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t},\n\t\t\"bank_product_id\": {\n\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t},\n\t\t\"internal_identification\": {\n\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t},\n\t\t\"public_identification_name\": {\n\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t},\n\t\t\"public_identification_value\": {\n\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t},\n\t\t\"last_accessed_at\": {\n\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t},\n\t\t\"credit_data\": {\n\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t},\n\t\t\"loan_data\": {\n\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t},\n\t\t\"funds_data\": {\n\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t},\n\t\t\"gig_payment_data\": {\n\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t}\n\t}\n]"
+								},
+								{
+									"id": "accbeacf-f3eb-4aea-9107-95a03a6dce20",
+									"name": "Created (when save_data=true)",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: basic",
+												"key": "Authorization",
+												"value": "Basic <credentials>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"link\": \"<uuid>\",\n    \"encryption_key\": \"<string>\",\n    \"token\": \"<string>\",\n    \"save_data\": true\n}"
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/accounts",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"accounts"
+											]
+										}
+									},
+									"status": "Created",
+									"code": 201,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "[\n\t{\n\t\t\"id\": \"<uuid>\",\n\t\t\"link\": {\n\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t},\n\t\t\"institution\": {\n\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t},\n\t\t\"collected_at\": {\n\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t},\n\t\t\"category\": {\n\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t},\n\t\t\"type\": {\n\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t},\n\t\t\"name\": {\n\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t},\n\t\t\"number\": {\n\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t},\n\t\t\"balance\": {\n\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t},\n\t\t\"currency\": {\n\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t},\n\t\t\"bank_product_id\": {\n\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t},\n\t\t\"internal_identification\": {\n\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t},\n\t\t\"public_identification_name\": {\n\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t},\n\t\t\"public_identification_value\": {\n\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t},\n\t\t\"last_accessed_at\": {\n\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t},\n\t\t\"credit_data\": {\n\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t},\n\t\t\"loan_data\": {\n\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t},\n\t\t\"funds_data\": {\n\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t},\n\t\t\"gig_payment_data\": {\n\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t}\n\t},\n\t{\n\t\t\"id\": \"<uuid>\",\n\t\t\"link\": {\n\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t},\n\t\t\"institution\": {\n\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t},\n\t\t\"collected_at\": {\n\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t},\n\t\t\"category\": {\n\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t},\n\t\t\"type\": {\n\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t},\n\t\t\"name\": {\n\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t},\n\t\t\"number\": {\n\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t},\n\t\t\"balance\": {\n\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t},\n\t\t\"currency\": {\n\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t},\n\t\t\"bank_product_id\": {\n\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t},\n\t\t\"internal_identification\": {\n\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t},\n\t\t\"public_identification_name\": {\n\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t},\n\t\t\"public_identification_value\": {\n\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t},\n\t\t\"last_accessed_at\": {\n\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t},\n\t\t\"credit_data\": {\n\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t},\n\t\t\"loan_data\": {\n\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t},\n\t\t\"funds_data\": {\n\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t},\n\t\t\"gig_payment_data\": {\n\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t}\n\t}\n]"
+								},
+								{
+									"id": "72bd3e33-5a4c-4dc2-8aab-26e64341cf65",
+									"name": "Bad request error",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: basic",
+												"key": "Authorization",
+												"value": "Basic <credentials>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"link\": \"<uuid>\",\n    \"encryption_key\": \"<string>\",\n    \"token\": \"<string>\",\n    \"save_data\": true\n}"
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/accounts",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"accounts"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "[\n\t{\n\t\t\"code\": \"<string>\",\n\t\t\"message\": \"<string>\",\n\t\t\"request_id\": \"<string>\"\n\t},\n\t{\n\t\t\"code\": \"<string>\",\n\t\t\"message\": \"<string>\",\n\t\t\"request_id\": \"<string>\"\n\t}\n]"
+								},
+								{
+									"id": "e86309cf-4675-4d8a-9186-fc80e05ad79a",
+									"name": "Unauthorized",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: basic",
+												"key": "Authorization",
+												"value": "Basic <credentials>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"link\": \"<uuid>\",\n    \"encryption_key\": \"<string>\",\n    \"token\": \"<string>\",\n    \"save_data\": true\n}"
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/accounts",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"accounts"
+											]
+										}
+									},
+									"status": "Unauthorized",
+									"code": 401,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "[\n\t{\n\t\t\"code\": \"<string>\",\n\t\t\"message\": \"<string>\",\n\t\t\"request_id\": \"<string>\"\n\t},\n\t{\n\t\t\"code\": \"<string>\",\n\t\t\"message\": \"<string>\",\n\t\t\"request_id\": \"<string>\"\n\t}\n]"
+								},
+								{
+									"id": "380083c0-2fec-40f4-a1bd-7ba7033ae4fc",
+									"name": "Request Timeout",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: basic",
+												"key": "Authorization",
+												"value": "Basic <credentials>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"link\": \"<uuid>\",\n    \"encryption_key\": \"<string>\",\n    \"token\": \"<string>\",\n    \"save_data\": true\n}"
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/accounts",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"accounts"
+											]
+										}
+									},
+									"status": "Request Timeout",
+									"code": 408,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "[\n\t{\n\t\t\"code\": \"<string>\",\n\t\t\"message\": \"<string>\",\n\t\t\"request_id\": \"<string>\"\n\t},\n\t{\n\t\t\"code\": \"<string>\",\n\t\t\"message\": \"<string>\",\n\t\t\"request_id\": \"<string>\"\n\t}\n]"
+								},
+								{
+									"id": "8800d389-8c10-4d35-bad1-5c5533636880",
+									"name": "MFA Token Required",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: basic",
+												"key": "Authorization",
+												"value": "Basic <credentials>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"link\": \"<uuid>\",\n    \"encryption_key\": \"<string>\",\n    \"token\": \"<string>\",\n    \"save_data\": true\n}"
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/accounts",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"accounts"
+											]
+										}
+									},
+									"status": "Precondition Required",
+									"code": 428,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\n\t\"code\": \"<string>\",\n\t\"message\": \"<string>\",\n\t\"request_id\": \"<uuid>\",\n\t\"session\": \"<uuid>\",\n\t\"expiry\": \"<integer>\",\n\t\"link\": \"<uuid>\",\n\t\"token_generation_data\": {\n\t\t\"instructions\": \"<string>\",\n\t\t\"type\": \"<string>\",\n\t\t\"value\": \"<string>\"\n\t}\n}"
+								},
+								{
+									"id": "797838a6-73dc-4f72-8f4f-2b38141bcf74",
+									"name": "Unexpected Error",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: basic",
+												"key": "Authorization",
+												"value": "Basic <credentials>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"link\": \"<uuid>\",\n    \"encryption_key\": \"<string>\",\n    \"token\": \"<string>\",\n    \"save_data\": true\n}"
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/accounts",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"accounts"
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "[\n\t{\n\t\t\"code\": \"<string>\",\n\t\t\"message\": \"<string>\",\n\t\t\"request_id\": \"<string>\"\n\t},\n\t{\n\t\t\"code\": \"<string>\",\n\t\t\"message\": \"<string>\",\n\t\t\"request_id\": \"<string>\"\n\t}\n]"
+								}
+							]
+						}
+					],
+					"id": "b8f235bf-b7ce-4007-9e27-12823d3c565c",
+					"description": "# Documentation 😍\n\nRead up on our [Accounts resources](https://developers.belvo.com/docs/banking#accounts) on our DevPortal! And for information about all the HTTP calls (required fields, response documentation, and so on) check out our [API Reference](https://developers.belvo.com/reference/accounts-1)."
+				},
+				{
+					"name": "Transactions",
+					"item": [
+						{
+							"name": "Retrieve transactions for a link",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "00f0b018-3dea-4df4-907d-e114ff36dfbf",
+										"exec": [
+											"var template=`",
+											"",
+											"<style>",
+											"    td, th {text-align: center; padding:15px;}",
+											"    table, th, td {",
+											"        border: 1px solid black;",
+											"    }",
+											"    </style>",
+											"",
+											"        <table bgcolor=\"#ffffff\"> ",
+											"    ",
+											"            <tr>",
+											"               <tr bgcolor=\"#50a9f2\">",
+											"                <th>account</th>",
+											"                <th>institution</th>",
+											"                <th>value_date</th>",
+											"                <th>merchant</th>",
+											"                <th>currency</th>",
+											"                <th>amount</th>",
+											"                <th>status</th>",
+											"                             ",
+											"            </tr>",
+											"",
+											"        {{#each response}}",
+											"            </tr>",
+											"                <td>{{account.id}}</td>",
+											"                <td>{{account.institution.name}}</td>",
+											"                <td>{{value_date}}</td>",
+											"                <td>{{merchant.name}}</td>",
+											"                <td>{{currency}}</td>",
+											"                <td>{{amount}}</td>",
+											"                <td>{{status}}</td>",
+											"            </tr>",
+											"        {{/each}}",
+											"    </table>",
+											"`;",
+											"pm.visualizer.set(template, {",
+											"    response:pm.response.json()",
+											"//response:JSON.parse(responseBody)",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"id": "8b088dd4-888e-4c7c-a8f6-8f2a8207e68d",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"link\": \"d46cf916-049e-4f20-b101-3daf470bfdf1\",\n    \"date_from\": \"2022-05-21\",\n    \"date_to\": \"2022-05-31\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/transactions/",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"transactions",
+										""
+									]
+								},
+								"description": "# Documentation 📖\n\nSee detailed documentation for the **Retrieve transactions for a link** call in our [API Reference](https://developers.belvo.com/reference/retrievetransactions)."
+							},
+							"response": [
+								{
+									"id": "d605643a-3cc4-4594-81c7-fe3436e8f6ad",
+									"name": "Ok (when save_data=false)",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: basic",
+												"key": "Authorization",
+												"value": "Basic <credentials>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"date_from\": \"<date>\",\n    \"date_to\": \"<date>\",\n    \"link\": \"<uuid>\",\n    \"encryption_key\": \"<string>\",\n    \"token\": \"<string>\",\n    \"save_data\": true,\n    \"account\": \"<uuid>\"\n}"
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/transactions",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"transactions"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "[\n\t{\n\t\t\"account\": {\n\t\t\t\"link\": {\n\t\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t\t},\n\t\t\t\"institution\": {\n\t\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t\t},\n\t\t\t\"collected_at\": {\n\t\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t\t},\n\t\t\t\"category\": {\n\t\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t\t},\n\t\t\t\"type\": {\n\t\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t\t},\n\t\t\t\"name\": {\n\t\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t\t},\n\t\t\t\"number\": {\n\t\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t\t},\n\t\t\t\"balance\": {\n\t\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t\t},\n\t\t\t\"currency\": {\n\t\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t\t},\n\t\t\t\"bank_product_id\": {\n\t\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t\t},\n\t\t\t\"internal_identification\": {\n\t\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t\t},\n\t\t\t\"public_identification_name\": {\n\t\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t\t},\n\t\t\t\"public_identification_value\": {\n\t\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t\t},\n\t\t\t\"last_accessed_at\": {\n\t\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t\t},\n\t\t\t\"credit_data\": {\n\t\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t\t},\n\t\t\t\"loan_data\": {\n\t\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t\t},\n\t\t\t\"funds_data\": {\n\t\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t\t},\n\t\t\t\"gig_payment_data\": {\n\t\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t\t}\n\t\t},\n\t\t\"collected_at\": \"<date>\",\n\t\t\"value_date\": \"<string>\",\n\t\t\"accounting_date\": \"<date>\",\n\t\t\"amount\": \"<number>\",\n\t\t\"balance\": \"<number>\",\n\t\t\"currency\": \"<string>\",\n\t\t\"description\": \"<string>\",\n\t\t\"observations\": \"<string>\",\n\t\t\"category\": \"<string>\",\n\t\t\"reference\": \"<string>\",\n\t\t\"type\": \"in aliqua exercitation Ut ipsum\",\n\t\t\"status\": \"aliqua veniam in\",\n\t\t\"gig_data\": {\n\t\t\t\"pickup_at\": \"<dateTime>\",\n\t\t\t\"dropoff_at\": \"<dateTime>\",\n\t\t\t\"request_at\": \"<dateTime>\",\n\t\t\t\"pickup_address\": \"<string>\",\n\t\t\t\"dropoff_address\": \"<string>\",\n\t\t\t\"pickup_latitude\": \"<number>\",\n\t\t\t\"pickup_longitude\": \"<number>\",\n\t\t\t\"dropoff_latitude\": \"<number>\",\n\t\t\t\"dropoff_longitude\": \"<number>\",\n\t\t\t\"distance\": \"<number>\",\n\t\t\t\"payment_method\": \"<string>\",\n\t\t\t\"vehicle_type\": \"<string>\",\n\t\t\t\"merchant_type\": \"<string>\",\n\t\t\t\"breakdown\": [\n\t\t\t\t{\n\t\t\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t\t\t}\n\t\t\t],\n\t\t\t\"collected_at\": \"<dateTime>\"\n\t\t},\n\t\t\"credit_card_data\": {\n\t\t\t\"bill_name\": \"<string>\"\n\t\t}\n\t},\n\t{\n\t\t\"account\": {\n\t\t\t\"link\": {\n\t\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t\t},\n\t\t\t\"institution\": {\n\t\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t\t},\n\t\t\t\"collected_at\": {\n\t\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t\t},\n\t\t\t\"category\": {\n\t\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t\t},\n\t\t\t\"type\": {\n\t\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t\t},\n\t\t\t\"name\": {\n\t\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t\t},\n\t\t\t\"number\": {\n\t\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t\t},\n\t\t\t\"balance\": {\n\t\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t\t},\n\t\t\t\"currency\": {\n\t\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t\t},\n\t\t\t\"bank_product_id\": {\n\t\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t\t},\n\t\t\t\"internal_identification\": {\n\t\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t\t},\n\t\t\t\"public_identification_name\": {\n\t\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t\t},\n\t\t\t\"public_identification_value\": {\n\t\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t\t},\n\t\t\t\"last_accessed_at\": {\n\t\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t\t},\n\t\t\t\"credit_data\": {\n\t\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t\t},\n\t\t\t\"loan_data\": {\n\t\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t\t},\n\t\t\t\"funds_data\": {\n\t\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t\t},\n\t\t\t\"gig_payment_data\": {\n\t\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t\t}\n\t\t},\n\t\t\"collected_at\": \"<date>\",\n\t\t\"value_date\": \"<string>\",\n\t\t\"accounting_date\": \"<date>\",\n\t\t\"amount\": \"<number>\",\n\t\t\"balance\": \"<number>\",\n\t\t\"currency\": \"<string>\",\n\t\t\"description\": \"<string>\",\n\t\t\"observations\": \"<string>\",\n\t\t\"category\": \"<string>\",\n\t\t\"reference\": \"<string>\",\n\t\t\"type\": \"ad cupidatat nisi\",\n\t\t\"status\": \"eiusmod\",\n\t\t\"gig_data\": {\n\t\t\t\"pickup_at\": \"<dateTime>\",\n\t\t\t\"dropoff_at\": \"<dateTime>\",\n\t\t\t\"request_at\": \"<dateTime>\",\n\t\t\t\"pickup_address\": \"<string>\",\n\t\t\t\"dropoff_address\": \"<string>\",\n\t\t\t\"pickup_latitude\": \"<number>\",\n\t\t\t\"pickup_longitude\": \"<number>\",\n\t\t\t\"dropoff_latitude\": \"<number>\",\n\t\t\t\"dropoff_longitude\": \"<number>\",\n\t\t\t\"distance\": \"<number>\",\n\t\t\t\"payment_method\": \"<string>\",\n\t\t\t\"vehicle_type\": \"<string>\",\n\t\t\t\"merchant_type\": \"<string>\",\n\t\t\t\"breakdown\": [\n\t\t\t\t{\n\t\t\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t\t\t}\n\t\t\t],\n\t\t\t\"collected_at\": \"<dateTime>\"\n\t\t},\n\t\t\"credit_card_data\": {\n\t\t\t\"bill_name\": \"<string>\"\n\t\t}\n\t}\n]"
+								},
+								{
+									"id": "e59c483b-4ecd-45b8-b693-daa876113d8d",
+									"name": "Created (when save_data=true)",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: basic",
+												"key": "Authorization",
+												"value": "Basic <credentials>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"date_from\": \"<date>\",\n    \"date_to\": \"<date>\",\n    \"link\": \"<uuid>\",\n    \"encryption_key\": \"<string>\",\n    \"token\": \"<string>\",\n    \"save_data\": true,\n    \"account\": \"<uuid>\"\n}"
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/transactions",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"transactions"
+											]
+										}
+									},
+									"status": "Created",
+									"code": 201,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "[\n\t{\n\t\t\"id\": \"<uuid>\",\n\t\t\"account\": {\n\t\t\t\"id\": \"<uuid>\",\n\t\t\t\"link\": {\n\t\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t\t},\n\t\t\t\"institution\": {\n\t\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t\t},\n\t\t\t\"collected_at\": {\n\t\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t\t},\n\t\t\t\"category\": {\n\t\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t\t},\n\t\t\t\"type\": {\n\t\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t\t},\n\t\t\t\"name\": {\n\t\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t\t},\n\t\t\t\"number\": {\n\t\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t\t},\n\t\t\t\"balance\": {\n\t\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t\t},\n\t\t\t\"currency\": {\n\t\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t\t},\n\t\t\t\"bank_product_id\": {\n\t\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t\t},\n\t\t\t\"internal_identification\": {\n\t\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t\t},\n\t\t\t\"public_identification_name\": {\n\t\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t\t},\n\t\t\t\"public_identification_value\": {\n\t\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t\t},\n\t\t\t\"last_accessed_at\": {\n\t\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t\t},\n\t\t\t\"credit_data\": {\n\t\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t\t},\n\t\t\t\"loan_data\": {\n\t\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t\t},\n\t\t\t\"funds_data\": {\n\t\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t\t},\n\t\t\t\"gig_payment_data\": {\n\t\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t\t}\n\t\t},\n\t\t\"collected_at\": \"<date>\",\n\t\t\"value_date\": \"<string>\",\n\t\t\"accounting_date\": \"<date>\",\n\t\t\"amount\": \"<number>\",\n\t\t\"balance\": \"<number>\",\n\t\t\"currency\": \"<string>\",\n\t\t\"description\": \"<string>\",\n\t\t\"observations\": \"<string>\",\n\t\t\"category\": \"<string>\",\n\t\t\"reference\": \"<string>\",\n\t\t\"type\": \"deserun\",\n\t\t\"status\": \"elit tempor aliquip\",\n\t\t\"gig_data\": {\n\t\t\t\"pickup_at\": \"<dateTime>\",\n\t\t\t\"dropoff_at\": \"<dateTime>\",\n\t\t\t\"request_at\": \"<dateTime>\",\n\t\t\t\"pickup_address\": \"<string>\",\n\t\t\t\"dropoff_address\": \"<string>\",\n\t\t\t\"pickup_latitude\": \"<number>\",\n\t\t\t\"pickup_longitude\": \"<number>\",\n\t\t\t\"dropoff_latitude\": \"<number>\",\n\t\t\t\"dropoff_longitude\": \"<number>\",\n\t\t\t\"distance\": \"<number>\",\n\t\t\t\"payment_method\": \"<string>\",\n\t\t\t\"vehicle_type\": \"<string>\",\n\t\t\t\"merchant_type\": \"<string>\",\n\t\t\t\"breakdown\": [\n\t\t\t\t{\n\t\t\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t\t\t}\n\t\t\t],\n\t\t\t\"collected_at\": \"<dateTime>\"\n\t\t},\n\t\t\"credit_card_data\": {\n\t\t\t\"bill_name\": \"<string>\"\n\t\t}\n\t},\n\t{\n\t\t\"id\": \"<uuid>\",\n\t\t\"account\": {\n\t\t\t\"id\": \"<uuid>\",\n\t\t\t\"link\": {\n\t\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t\t},\n\t\t\t\"institution\": {\n\t\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t\t},\n\t\t\t\"collected_at\": {\n\t\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t\t},\n\t\t\t\"category\": {\n\t\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t\t},\n\t\t\t\"type\": {\n\t\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t\t},\n\t\t\t\"name\": {\n\t\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t\t},\n\t\t\t\"number\": {\n\t\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t\t},\n\t\t\t\"balance\": {\n\t\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t\t},\n\t\t\t\"currency\": {\n\t\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t\t},\n\t\t\t\"bank_product_id\": {\n\t\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t\t},\n\t\t\t\"internal_identification\": {\n\t\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t\t},\n\t\t\t\"public_identification_name\": {\n\t\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t\t},\n\t\t\t\"public_identification_value\": {\n\t\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t\t},\n\t\t\t\"last_accessed_at\": {\n\t\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t\t},\n\t\t\t\"credit_data\": {\n\t\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t\t},\n\t\t\t\"loan_data\": {\n\t\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t\t},\n\t\t\t\"funds_data\": {\n\t\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t\t},\n\t\t\t\"gig_payment_data\": {\n\t\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t\t}\n\t\t},\n\t\t\"collected_at\": \"<date>\",\n\t\t\"value_date\": \"<string>\",\n\t\t\"accounting_date\": \"<date>\",\n\t\t\"amount\": \"<number>\",\n\t\t\"balance\": \"<number>\",\n\t\t\"currency\": \"<string>\",\n\t\t\"description\": \"<string>\",\n\t\t\"observations\": \"<string>\",\n\t\t\"category\": \"<string>\",\n\t\t\"reference\": \"<string>\",\n\t\t\"type\": \"amet eiusmod\",\n\t\t\"status\": \"amet exercitation\",\n\t\t\"gig_data\": {\n\t\t\t\"pickup_at\": \"<dateTime>\",\n\t\t\t\"dropoff_at\": \"<dateTime>\",\n\t\t\t\"request_at\": \"<dateTime>\",\n\t\t\t\"pickup_address\": \"<string>\",\n\t\t\t\"dropoff_address\": \"<string>\",\n\t\t\t\"pickup_latitude\": \"<number>\",\n\t\t\t\"pickup_longitude\": \"<number>\",\n\t\t\t\"dropoff_latitude\": \"<number>\",\n\t\t\t\"dropoff_longitude\": \"<number>\",\n\t\t\t\"distance\": \"<number>\",\n\t\t\t\"payment_method\": \"<string>\",\n\t\t\t\"vehicle_type\": \"<string>\",\n\t\t\t\"merchant_type\": \"<string>\",\n\t\t\t\"breakdown\": [\n\t\t\t\t{\n\t\t\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t\t\t}\n\t\t\t],\n\t\t\t\"collected_at\": \"<dateTime>\"\n\t\t},\n\t\t\"credit_card_data\": {\n\t\t\t\"bill_name\": \"<string>\"\n\t\t}\n\t}\n]"
+								},
+								{
+									"id": "c229405d-edd0-471f-b98e-17b24612002d",
+									"name": "Bad request error",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: basic",
+												"key": "Authorization",
+												"value": "Basic <credentials>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"date_from\": \"<date>\",\n    \"date_to\": \"<date>\",\n    \"link\": \"<uuid>\",\n    \"encryption_key\": \"<string>\",\n    \"token\": \"<string>\",\n    \"save_data\": true,\n    \"account\": \"<uuid>\"\n}"
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/transactions",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"transactions"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "[\n\t{\n\t\t\"code\": \"<string>\",\n\t\t\"message\": \"<string>\",\n\t\t\"request_id\": \"<string>\"\n\t},\n\t{\n\t\t\"code\": \"<string>\",\n\t\t\"message\": \"<string>\",\n\t\t\"request_id\": \"<string>\"\n\t}\n]"
+								},
+								{
+									"id": "cebee5c4-5104-4bd1-9b2a-399cd51ed67a",
+									"name": "Unauthorized",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: basic",
+												"key": "Authorization",
+												"value": "Basic <credentials>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"date_from\": \"<date>\",\n    \"date_to\": \"<date>\",\n    \"link\": \"<uuid>\",\n    \"encryption_key\": \"<string>\",\n    \"token\": \"<string>\",\n    \"save_data\": true,\n    \"account\": \"<uuid>\"\n}"
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/transactions",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"transactions"
+											]
+										}
+									},
+									"status": "Unauthorized",
+									"code": 401,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "[\n\t{\n\t\t\"code\": \"<string>\",\n\t\t\"message\": \"<string>\",\n\t\t\"request_id\": \"<string>\"\n\t},\n\t{\n\t\t\"code\": \"<string>\",\n\t\t\"message\": \"<string>\",\n\t\t\"request_id\": \"<string>\"\n\t}\n]"
+								},
+								{
+									"id": "fa7da5f8-04e4-4b98-a83b-56523d4ab50f",
+									"name": "Request Timeout",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: basic",
+												"key": "Authorization",
+												"value": "Basic <credentials>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"date_from\": \"<date>\",\n    \"date_to\": \"<date>\",\n    \"link\": \"<uuid>\",\n    \"encryption_key\": \"<string>\",\n    \"token\": \"<string>\",\n    \"save_data\": true,\n    \"account\": \"<uuid>\"\n}"
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/transactions",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"transactions"
+											]
+										}
+									},
+									"status": "Request Timeout",
+									"code": 408,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "[\n\t{\n\t\t\"code\": \"<string>\",\n\t\t\"message\": \"<string>\",\n\t\t\"request_id\": \"<string>\"\n\t},\n\t{\n\t\t\"code\": \"<string>\",\n\t\t\"message\": \"<string>\",\n\t\t\"request_id\": \"<string>\"\n\t}\n]"
+								},
+								{
+									"id": "d5bf1ce7-e765-4ef1-a30c-d73300763ac2",
+									"name": "MFA Token Required",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: basic",
+												"key": "Authorization",
+												"value": "Basic <credentials>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"date_from\": \"<date>\",\n    \"date_to\": \"<date>\",\n    \"link\": \"<uuid>\",\n    \"encryption_key\": \"<string>\",\n    \"token\": \"<string>\",\n    \"save_data\": true,\n    \"account\": \"<uuid>\"\n}"
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/transactions",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"transactions"
+											]
+										}
+									},
+									"status": "Precondition Required",
+									"code": 428,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\n\t\"code\": \"<string>\",\n\t\"message\": \"<string>\",\n\t\"request_id\": \"<uuid>\",\n\t\"session\": \"<uuid>\",\n\t\"expiry\": \"<integer>\",\n\t\"link\": \"<uuid>\",\n\t\"token_generation_data\": {\n\t\t\"instructions\": \"<string>\",\n\t\t\"type\": \"<string>\",\n\t\t\"value\": \"<string>\"\n\t}\n}"
+								},
+								{
+									"id": "682039f1-80a2-4b8a-b40e-907edbfe8c8b",
+									"name": "Unexpected Error",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: basic",
+												"key": "Authorization",
+												"value": "Basic <credentials>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"date_from\": \"<date>\",\n    \"date_to\": \"<date>\",\n    \"link\": \"<uuid>\",\n    \"encryption_key\": \"<string>\",\n    \"token\": \"<string>\",\n    \"save_data\": true,\n    \"account\": \"<uuid>\"\n}"
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/transactions",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"transactions"
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "[\n\t{\n\t\t\"code\": \"<string>\",\n\t\t\"message\": \"<string>\",\n\t\t\"request_id\": \"<string>\"\n\t},\n\t{\n\t\t\"code\": \"<string>\",\n\t\t\"message\": \"<string>\",\n\t\t\"request_id\": \"<string>\"\n\t}\n]"
+								}
+							]
+						}
+					],
+					"id": "bee12f35-1035-4296-a441-aabc9856609b",
+					"description": "# Documentation 😍\n\nRead up on our [Transactions resources](https://developers.belvo.com/docs/banking#transactions) on our DevPortal! And for information about all the HTTP calls (required fields, response documentation, and so on) check out our [API Reference](https://developers.belvo.com/reference/transactions)."
+				},
+				{
+					"name": "Balances",
+					"item": [
+						{
+							"name": "Retrieve balances for a link",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "e106f35e-69cc-4770-97ad-6cfaa025b16d",
+										"exec": [
+											"var template=`",
+											"",
+											"<style>",
+											"    td, th {text-align: center; padding:15px;}",
+											"    table, th, td {",
+											"        border: 1px solid black;",
+											"    }",
+											"</style>",
+											"",
+											"",
+											"        <table bgcolor=\"#ffffff\"> ",
+											"    ",
+											"",
+											"            <tr>",
+											"            <tr bgcolor=\"#50a9f2\">",
+											"                <th>account</th>",
+											"                <th>institution</th>",
+											"                <th>value_date</th>",
+											"                <th>currency</th>",
+											"                <th>available</th>",
+											"                             ",
+											"            </tr>",
+											"",
+											"        {{#each response}}",
+											"            </tr>",
+											"                <td>{{account.id}}</td>",
+											"                <td>{{account.institution.name}}</td>",
+											"                <td>{{value_date}}</td>",
+											"                <td>{{account.currency}}</td>",
+											"                <td>{{account.balance.available}}</td>",
+											"            </tr>",
+											"        {{/each}}",
+											"    </table>",
+											"`;",
+											"pm.visualizer.set(template, {",
+											"    response:pm.response.json()",
+											"//response:JSON.parse(responseBody)",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"id": "8e03ecfe-d8fc-4279-af25-837b376e9c3e",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"link\": \"d46cf916-049e-4f20-b101-3daf470bfdf1\",\n    \"date_from\": \"2022-05-21\",\n    \"date_to\": \"2022-05-31\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/balances/",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"balances",
+										""
+									]
+								},
+								"description": "# Documentation 📖\n\nSee detailed documentation for the **Retrieve balances for a link** call in our [API Reference](https://developers.belvo.com/reference/retrievebalances)."
+							},
+							"response": [
+								{
+									"id": "5237c5ac-9e85-4172-868a-5a8b0f4ec103",
+									"name": "Ok (when save_data=false)",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: basic",
+												"key": "Authorization",
+												"value": "Basic <credentials>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"date_from\": \"<date>\",\n    \"date_to\": \"<date>\",\n    \"link\": \"<uuid>\",\n    \"encryption_key\": \"<string>\",\n    \"token\": \"<string>\",\n    \"save_data\": true,\n    \"account\": \"<uuid>\"\n}"
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/balances",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"balances"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "[\n\t{\n\t\t\"id\": \"<uuid>\",\n\t\t\"account\": {\n\t\t\t\"id\": \"<uuid>\",\n\t\t\t\"name\": \"<string>\",\n\t\t\t\"category\": \"eu exercitation id ullamco\",\n\t\t\t\"currency\": \"<string>\"\n\t\t},\n\t\t\"collected_at\": \"<dateTime>\",\n\t\t\"value_date\": \"<date>\",\n\t\t\"balance\": \"<number>\",\n\t\t\"current_balance\": \"<number>\",\n\t\t\"statement\": \"<string>\"\n\t},\n\t{\n\t\t\"id\": \"<uuid>\",\n\t\t\"account\": {\n\t\t\t\"id\": \"<uuid>\",\n\t\t\t\"name\": \"<string>\",\n\t\t\t\"category\": \"eu tempor adipisicing\",\n\t\t\t\"currency\": \"<string>\"\n\t\t},\n\t\t\"collected_at\": \"<dateTime>\",\n\t\t\"value_date\": \"<date>\",\n\t\t\"balance\": \"<number>\",\n\t\t\"current_balance\": \"<number>\",\n\t\t\"statement\": \"<string>\"\n\t}\n]"
+								},
+								{
+									"id": "8796045e-47b3-439b-9bd4-7ea3167d5376",
+									"name": "Created (when save_data=true)",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: basic",
+												"key": "Authorization",
+												"value": "Basic <credentials>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"date_from\": \"<date>\",\n    \"date_to\": \"<date>\",\n    \"link\": \"<uuid>\",\n    \"encryption_key\": \"<string>\",\n    \"token\": \"<string>\",\n    \"save_data\": true,\n    \"account\": \"<uuid>\"\n}"
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/balances",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"balances"
+											]
+										}
+									},
+									"status": "Created",
+									"code": 201,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "[\n\t{\n\t\t\"id\": \"<uuid>\",\n\t\t\"account\": {\n\t\t\t\"id\": \"<uuid>\",\n\t\t\t\"name\": \"<string>\",\n\t\t\t\"category\": \"eu exercitation id ullamco\",\n\t\t\t\"currency\": \"<string>\"\n\t\t},\n\t\t\"collected_at\": \"<dateTime>\",\n\t\t\"value_date\": \"<date>\",\n\t\t\"balance\": \"<number>\",\n\t\t\"current_balance\": \"<number>\",\n\t\t\"statement\": \"<string>\"\n\t},\n\t{\n\t\t\"id\": \"<uuid>\",\n\t\t\"account\": {\n\t\t\t\"id\": \"<uuid>\",\n\t\t\t\"name\": \"<string>\",\n\t\t\t\"category\": \"eu tempor adipisicing\",\n\t\t\t\"currency\": \"<string>\"\n\t\t},\n\t\t\"collected_at\": \"<dateTime>\",\n\t\t\"value_date\": \"<date>\",\n\t\t\"balance\": \"<number>\",\n\t\t\"current_balance\": \"<number>\",\n\t\t\"statement\": \"<string>\"\n\t}\n]"
+								},
+								{
+									"id": "f9a43d4e-a444-42ee-8ffd-dfac6b84215c",
+									"name": "Bad request error",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: basic",
+												"key": "Authorization",
+												"value": "Basic <credentials>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"date_from\": \"<date>\",\n    \"date_to\": \"<date>\",\n    \"link\": \"<uuid>\",\n    \"encryption_key\": \"<string>\",\n    \"token\": \"<string>\",\n    \"save_data\": true,\n    \"account\": \"<uuid>\"\n}"
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/balances",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"balances"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "[\n\t{\n\t\t\"code\": \"<string>\",\n\t\t\"message\": \"<string>\",\n\t\t\"request_id\": \"<string>\"\n\t},\n\t{\n\t\t\"code\": \"<string>\",\n\t\t\"message\": \"<string>\",\n\t\t\"request_id\": \"<string>\"\n\t}\n]"
+								},
+								{
+									"id": "74f3aff1-16f8-4c98-8b87-756e0d6ba85a",
+									"name": "Unauthorized",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: basic",
+												"key": "Authorization",
+												"value": "Basic <credentials>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"date_from\": \"<date>\",\n    \"date_to\": \"<date>\",\n    \"link\": \"<uuid>\",\n    \"encryption_key\": \"<string>\",\n    \"token\": \"<string>\",\n    \"save_data\": true,\n    \"account\": \"<uuid>\"\n}"
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/balances",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"balances"
+											]
+										}
+									},
+									"status": "Unauthorized",
+									"code": 401,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "[\n\t{\n\t\t\"code\": \"<string>\",\n\t\t\"message\": \"<string>\",\n\t\t\"request_id\": \"<string>\"\n\t},\n\t{\n\t\t\"code\": \"<string>\",\n\t\t\"message\": \"<string>\",\n\t\t\"request_id\": \"<string>\"\n\t}\n]"
+								},
+								{
+									"id": "72fc872b-f822-4c8c-806e-b71a08e86ea5",
+									"name": "Request Timeout",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: basic",
+												"key": "Authorization",
+												"value": "Basic <credentials>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"date_from\": \"<date>\",\n    \"date_to\": \"<date>\",\n    \"link\": \"<uuid>\",\n    \"encryption_key\": \"<string>\",\n    \"token\": \"<string>\",\n    \"save_data\": true,\n    \"account\": \"<uuid>\"\n}"
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/balances",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"balances"
+											]
+										}
+									},
+									"status": "Request Timeout",
+									"code": 408,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "[\n\t{\n\t\t\"code\": \"<string>\",\n\t\t\"message\": \"<string>\",\n\t\t\"request_id\": \"<string>\"\n\t},\n\t{\n\t\t\"code\": \"<string>\",\n\t\t\"message\": \"<string>\",\n\t\t\"request_id\": \"<string>\"\n\t}\n]"
+								},
+								{
+									"id": "5af51467-9a81-4adf-89c6-e831bb1e69b9",
+									"name": "MFA Token Required",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: basic",
+												"key": "Authorization",
+												"value": "Basic <credentials>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"date_from\": \"<date>\",\n    \"date_to\": \"<date>\",\n    \"link\": \"<uuid>\",\n    \"encryption_key\": \"<string>\",\n    \"token\": \"<string>\",\n    \"save_data\": true,\n    \"account\": \"<uuid>\"\n}"
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/balances",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"balances"
+											]
+										}
+									},
+									"status": "Precondition Required",
+									"code": 428,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\n\t\"code\": \"<string>\",\n\t\"message\": \"<string>\",\n\t\"request_id\": \"<uuid>\",\n\t\"session\": \"<uuid>\",\n\t\"expiry\": \"<integer>\",\n\t\"link\": \"<uuid>\",\n\t\"token_generation_data\": {\n\t\t\"instructions\": \"<string>\",\n\t\t\"type\": \"<string>\",\n\t\t\"value\": \"<string>\"\n\t}\n}"
+								},
+								{
+									"id": "c89a4099-6438-43b6-b805-cb52600c2c12",
+									"name": "Unexpected Error",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: basic",
+												"key": "Authorization",
+												"value": "Basic <credentials>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"date_from\": \"<date>\",\n    \"date_to\": \"<date>\",\n    \"link\": \"<uuid>\",\n    \"encryption_key\": \"<string>\",\n    \"token\": \"<string>\",\n    \"save_data\": true,\n    \"account\": \"<uuid>\"\n}"
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/balances",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"balances"
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "[\n\t{\n\t\t\"code\": \"<string>\",\n\t\t\"message\": \"<string>\",\n\t\t\"request_id\": \"<string>\"\n\t},\n\t{\n\t\t\"code\": \"<string>\",\n\t\t\"message\": \"<string>\",\n\t\t\"request_id\": \"<string>\"\n\t}\n]"
+								}
+							]
+						}
+					],
+					"id": "a0a090b5-ac0d-4391-a6c0-0189749198f4",
+					"description": "# Documentation 😍\n\nRead up on our [Balances resources](https://developers.belvo.com/docs/banking#balances) on our DevPortal! And for information about all the HTTP calls (required fields, response documentation, and so on) check out our [API Reference](https://developers.belvo.com/reference/balances)."
+				},
+				{
+					"name": "Owners",
+					"item": [
+						{
+							"name": "Retrieve owners for a link",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "32ff3ea1-14f7-4476-bd94-0b9e7ff9cab0",
+										"exec": [
+											"var template=`",
+											"",
+											"<style>",
+											"    td, th {text-align: center; padding:15px;}",
+											"    table, th, td {",
+											"        border: 1px solid black;",
+											"    }",
+											"</style>",
+											"",
+											"<table bgcolor=\"#cce5ff\"> ",
+											"",
+											"        <table bgcolor=\"#ffffff\"> ",
+											"    ",
+											"",
+											"            <tr>",
+											"            <tr bgcolor=\"#50a9f2\">",
+											"                <th>id</th>",
+											"                <th>display_name</th>",
+											"                <th>first_name</th>",
+											"                <th>last_name</th>",
+											"                <th>second_last_name</th>",
+											"                <th>phone_number</th>",
+											"                <th>address</th>",
+											"                <th>doc type</th>",
+											"                <th>doc number</th>",
+											"                ",
+											"                             ",
+											"            </tr>",
+											"",
+											"        {{#each response}}",
+											"            </tr>",
+											"",
+											"                <td>{{id}}</td>",
+											"                <td>{{display_name}}</td>",
+											"                <td>{{first_name}}</td>",
+											"                <td>{{last_name}}</td>",
+											"                <td>{{second_last_name}}</td>",
+											"                <td>{{phone_number}}</td>",
+											"                <td>{{address}}</td>",
+											"                <td>{{document_id.document_type}}</td>",
+											"                <td>{{document_id.document_number}}</td>",
+											"            </tr>",
+											"        {{/each}}",
+											"    </table>",
+											"`;",
+											"pm.visualizer.set(template, {",
+											"response: pm.response.json()",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"id": "54d0a6a8-adbc-42e2-8d61-d4f45543a6fa",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "\n{\n    \"link\": \"d46cf916-049e-4f20-b101-3daf470bfdf1\"\n    \n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/owners/",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"owners",
+										""
+									]
+								},
+								"description": "# Documentation 📖\n\nSee detailed documentation for the **Retrieve owners for a link** call in our [API Reference](https://developers.belvo.com/reference/retrieveowners)."
+							},
+							"response": [
+								{
+									"id": "cdffb2f2-fdf2-49d6-aa0a-86ef819f3f8e",
+									"name": "Ok (when save_data=false)",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: basic",
+												"key": "Authorization",
+												"value": "Basic <credentials>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"link\": \"<uuid>\",\n    \"encryption_key\": \"<string>\",\n    \"token\": \"<string>\",\n    \"save_data\": true\n}"
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/owners",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"owners"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "[\n\t{\n\t\t\"link\": \"<uuid>\",\n\t\t\"collected_at\": \"<dateTime>\",\n\t\t\"display_name\": \"<string>\",\n\t\t\"first_name\": \"<string>\",\n\t\t\"last_name\": \"<string>\",\n\t\t\"second_last_name\": \"<string>\",\n\t\t\"address\": \"<string>\",\n\t\t\"email\": \"<email>\",\n\t\t\"phone_number\": \"<string>\",\n\t\t\"accounts\": [\n\t\t\t{\n\t\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t\t},\n\t\t\t{\n\t\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t\t}\n\t\t],\n\t\t\"gig_data\": {\n\t\t\t\"collected_at\": \"<dateTime>\",\n\t\t\t\"status\": \"<string>\",\n\t\t\t\"acceptance_rate\": \"<number>\"\n\t\t}\n\t},\n\t{\n\t\t\"link\": \"<uuid>\",\n\t\t\"collected_at\": \"<dateTime>\",\n\t\t\"display_name\": \"<string>\",\n\t\t\"first_name\": \"<string>\",\n\t\t\"last_name\": \"<string>\",\n\t\t\"second_last_name\": \"<string>\",\n\t\t\"address\": \"<string>\",\n\t\t\"email\": \"<email>\",\n\t\t\"phone_number\": \"<string>\",\n\t\t\"accounts\": [\n\t\t\t{\n\t\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t\t},\n\t\t\t{\n\t\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t\t}\n\t\t],\n\t\t\"gig_data\": {\n\t\t\t\"collected_at\": \"<dateTime>\",\n\t\t\t\"status\": \"<string>\",\n\t\t\t\"acceptance_rate\": \"<number>\"\n\t\t}\n\t}\n]"
+								},
+								{
+									"id": "e77260ab-64ad-4421-9cee-cc25f6b22887",
+									"name": "Created (when save_data=true)",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: basic",
+												"key": "Authorization",
+												"value": "Basic <credentials>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"link\": \"<uuid>\",\n    \"encryption_key\": \"<string>\",\n    \"token\": \"<string>\",\n    \"save_data\": true\n}"
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/owners",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"owners"
+											]
+										}
+									},
+									"status": "Created",
+									"code": 201,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "[\n\t{\n\t\t\"id\": \"<uuid>\",\n\t\t\"link\": \"<uuid>\",\n\t\t\"collected_at\": \"<dateTime>\",\n\t\t\"display_name\": \"<string>\",\n\t\t\"first_name\": \"<string>\",\n\t\t\"last_name\": \"<string>\",\n\t\t\"second_last_name\": \"<string>\",\n\t\t\"address\": \"<string>\",\n\t\t\"email\": \"<email>\",\n\t\t\"phone_number\": \"<string>\",\n\t\t\"accounts\": [\n\t\t\t{\n\t\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t\t},\n\t\t\t{\n\t\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t\t}\n\t\t],\n\t\t\"gig_data\": {\n\t\t\t\"collected_at\": \"<dateTime>\",\n\t\t\t\"status\": \"<string>\",\n\t\t\t\"acceptance_rate\": \"<number>\"\n\t\t}\n\t},\n\t{\n\t\t\"id\": \"<uuid>\",\n\t\t\"link\": \"<uuid>\",\n\t\t\"collected_at\": \"<dateTime>\",\n\t\t\"display_name\": \"<string>\",\n\t\t\"first_name\": \"<string>\",\n\t\t\"last_name\": \"<string>\",\n\t\t\"second_last_name\": \"<string>\",\n\t\t\"address\": \"<string>\",\n\t\t\"email\": \"<email>\",\n\t\t\"phone_number\": \"<string>\",\n\t\t\"accounts\": [\n\t\t\t{\n\t\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t\t},\n\t\t\t{\n\t\t\t\t\"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n\t\t\t}\n\t\t],\n\t\t\"gig_data\": {\n\t\t\t\"collected_at\": \"<dateTime>\",\n\t\t\t\"status\": \"<string>\",\n\t\t\t\"acceptance_rate\": \"<number>\"\n\t\t}\n\t}\n]"
+								},
+								{
+									"id": "465088a0-c29a-4011-8b6c-fcf58b30a2e7",
+									"name": "Bad request error",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: basic",
+												"key": "Authorization",
+												"value": "Basic <credentials>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"link\": \"<uuid>\",\n    \"encryption_key\": \"<string>\",\n    \"token\": \"<string>\",\n    \"save_data\": true\n}"
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/owners",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"owners"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "[\n\t{\n\t\t\"code\": \"<string>\",\n\t\t\"message\": \"<string>\",\n\t\t\"request_id\": \"<string>\"\n\t},\n\t{\n\t\t\"code\": \"<string>\",\n\t\t\"message\": \"<string>\",\n\t\t\"request_id\": \"<string>\"\n\t}\n]"
+								},
+								{
+									"id": "055b2ce3-edf4-461f-a636-ac62ffc77211",
+									"name": "Unauthorized",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: basic",
+												"key": "Authorization",
+												"value": "Basic <credentials>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"link\": \"<uuid>\",\n    \"encryption_key\": \"<string>\",\n    \"token\": \"<string>\",\n    \"save_data\": true\n}"
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/owners",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"owners"
+											]
+										}
+									},
+									"status": "Unauthorized",
+									"code": 401,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "[\n\t{\n\t\t\"code\": \"<string>\",\n\t\t\"message\": \"<string>\",\n\t\t\"request_id\": \"<string>\"\n\t},\n\t{\n\t\t\"code\": \"<string>\",\n\t\t\"message\": \"<string>\",\n\t\t\"request_id\": \"<string>\"\n\t}\n]"
+								},
+								{
+									"id": "bbbe39c6-3bdf-4395-9ca7-15b619bb667e",
+									"name": "Request Timeout",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: basic",
+												"key": "Authorization",
+												"value": "Basic <credentials>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"link\": \"<uuid>\",\n    \"encryption_key\": \"<string>\",\n    \"token\": \"<string>\",\n    \"save_data\": true\n}"
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/owners",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"owners"
+											]
+										}
+									},
+									"status": "Request Timeout",
+									"code": 408,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "[\n\t{\n\t\t\"code\": \"<string>\",\n\t\t\"message\": \"<string>\",\n\t\t\"request_id\": \"<string>\"\n\t},\n\t{\n\t\t\"code\": \"<string>\",\n\t\t\"message\": \"<string>\",\n\t\t\"request_id\": \"<string>\"\n\t}\n]"
+								},
+								{
+									"id": "c8452a9b-7821-49e9-b1c2-addd2f3424e5",
+									"name": "MFA Token Required",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: basic",
+												"key": "Authorization",
+												"value": "Basic <credentials>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"link\": \"<uuid>\",\n    \"encryption_key\": \"<string>\",\n    \"token\": \"<string>\",\n    \"save_data\": true\n}"
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/owners",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"owners"
+											]
+										}
+									},
+									"status": "Precondition Required",
+									"code": 428,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\n\t\"code\": \"<string>\",\n\t\"message\": \"<string>\",\n\t\"request_id\": \"<uuid>\",\n\t\"session\": \"<uuid>\",\n\t\"expiry\": \"<integer>\",\n\t\"link\": \"<uuid>\",\n\t\"token_generation_data\": {\n\t\t\"instructions\": \"<string>\",\n\t\t\"type\": \"<string>\",\n\t\t\"value\": \"<string>\"\n\t}\n}"
+								},
+								{
+									"id": "6b7c7a06-a963-4560-909c-ae65c6c63691",
+									"name": "Unexpected Error",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: basic",
+												"key": "Authorization",
+												"value": "Basic <credentials>"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"link\": \"<uuid>\",\n    \"encryption_key\": \"<string>\",\n    \"token\": \"<string>\",\n    \"save_data\": true\n}"
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/owners",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"owners"
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "[\n\t{\n\t\t\"code\": \"<string>\",\n\t\t\"message\": \"<string>\",\n\t\t\"request_id\": \"<string>\"\n\t},\n\t{\n\t\t\"code\": \"<string>\",\n\t\t\"message\": \"<string>\",\n\t\t\"request_id\": \"<string>\"\n\t}\n]"
+								}
+							]
+						}
+					],
+					"id": "460fed04-2eb8-41ae-b7a6-915218e4391b",
+					"description": "# Documentation 😍\n\nRead up on our [Owners resources](https://developers.belvo.com/docs/banking#owners) on our DevPortal! And for information about all the HTTP calls (required fields, response documentation, and so on) check out our [API Reference](https://developers.belvo.com/reference/owners)."
+				}
+			],
+			"id": "5af52710-a120-4119-ac70-30c58fd48257",
+			"description": "# Documentation 😍\n\nRead up on our [Banking and Gig API](https://developers.belvo.com/reference/banking-and-gig-api) on our DevPortal!"
+		},
+		{
+			"name": "Get Token",
+			"id": "82341704-3c2d-4d74-902b-34e6b6ecb972",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": \"eca5a0b4-fb05-4855-a484-2e54b6eba0a3\",\n    \"password\": \"L3PzBLUpAOGqpOT_wO_Fwu*QL5JzMMqLVlQqYFelu7m3rZV7MkOSPD6XM6qN93ym\",\n    \"scopes\": \"read_institutions,write_links,read_links\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sandbox.belvo.co/api/token",
+					"protocol": "https",
+					"host": [
+						"sandbox",
+						"belvo",
+						"co"
+					],
+					"path": [
+						"api",
+						"token"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "password",
+				"value": "{{secretPassword}}",
+				"type": "string"
+			},
+			{
+				"key": "username",
+				"value": "{{secretId}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "022914ab-e4be-4c40-8cec-70f0e77a94e6",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "5b39be20-7ea1-437e-a18d-9fcd6875f29c",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
